@@ -12,6 +12,10 @@ LABEL io.k8s.description="Tensorflow serving builder" \
 RUN yum install -y tree which \
 	&& yum clean all -y
 
+RUN wget -O /etc/yum.repos.d/tf-model-server.repo https://copr.fedorainfracloud.org/coprs/croberts/tensorflow-model-server/repo/epel-7/croberts-tensorflow-model-server-epel-7.repo \
+    && yum install -y tensorflow-model-server \
+    && yum clean all -y
+
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 #Drop the root user and make the content of /opt/app-root owned by user 1001
@@ -19,8 +23,6 @@ RUN chown -R 1001:1001 /opt/app-root
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001
-COPY ./tensorflow_model_server /opt/app-root/tensorflow_model_server
-
 
 # EXPOSE 6006
 

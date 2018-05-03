@@ -15,4 +15,4 @@ pwd
 
 echo " -----> Run tenserflow server."
 
-exec /opt/app-root/tensorflow_model_server --port=6006 --model_name=mnist --model_base_path=/opt/app-root/src/
+exec /usr/bin/tensorflow_model_server --port=6006 --model_name=mnist --model_base_path=/opt/app-root/src/
